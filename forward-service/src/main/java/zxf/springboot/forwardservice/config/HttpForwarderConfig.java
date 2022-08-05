@@ -14,7 +14,7 @@ import static zxf.springboot.forwardservice.support.httpforward.HttpForwardPrePr
 public class HttpForwarderConfig {
     private final HttpForwardUrlForward contentServiceUrlForward = HttpForwardUrlForward.create(
             "http://localhost:8080", "/forward/content/([\\w-./?%&=]*)", "/$1");
-    private final String basicAuthHeaderValue = HttpHeaders.encodeBasicAuth("zxf", "zxf", UTF_8);
+    private final String basicAuthHeaderValue = "Basic " + HttpHeaders.encodeBasicAuth("zxf", "zxf", UTF_8);
 
     @Bean(name = "contentServiceForwarder")
     public HttpForwarder contentServiceForwarder() {
