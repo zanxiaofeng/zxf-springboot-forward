@@ -13,26 +13,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class TextController {
     @GetMapping("/json")
     public ResponseEntity<String> getJson() {
-        return ResponseEntity.ok("{'state': 'ok'}");
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body("{'state': 'ok'}");
     }
 
     @PostMapping("/json")
     public ResponseEntity<String> postJson(RequestEntity<String> json) {
-        return ResponseEntity.ok(json.getBody());
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(json.getBody());
     }
 
     @GetMapping("/xml")
     public ResponseEntity<String> getXml() {
-        return ResponseEntity.ok("<abc>davis</abc>");
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_XML).body("<abc>davis</abc>");
     }
 
     @PostMapping("/xml")
     public ResponseEntity<String> postXml(RequestEntity<String> xml) {
-        return ResponseEntity.ok(xml.getBody());
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_XML).body(xml.getBody());
     }
 
     @GetMapping("/bad")
     public ResponseEntity<String> bad() {
-        return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body("{text failed}");
+        return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body("'text failed'");
     }
 }

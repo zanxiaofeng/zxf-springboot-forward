@@ -28,6 +28,6 @@ public class BinaryController {
 
     @GetMapping("/bad")
     public ResponseEntity<String> bad() {
-        return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body("{binary failed}");
+        return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body("'{'binary failed'");
     }
 }
