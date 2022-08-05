@@ -1,6 +1,8 @@
 package zxf.springboot.forwardservice.support.httpforward;
 
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HttpForwardUrlForward {
@@ -19,6 +21,15 @@ public class HttpForwardUrlForward {
     }
 
     public URI getForwardUrl(URI originalUrl) {
-        return null;
+        try {
+            Matcher pathMatcher = pathMatch.matcher(originalUrl.getPath());
+            if (!pathMatcher.matches()) {
+                throw new HttpForwardException("Exception on getForwardUrl: The request path does not match: " + originalUrl.getPath());
+            }
+            String newPath = pathMatcher.replaceAll(pathReplace);
+            return new URI(baseUrl.getScheme(), baseUrl.getUserInfo(), baseUrl.getHost(), baseUrl.getPort(), baseUrl.getPath() + newPath, originalUrl.getQuery(), originalUrl.getFragment());
+        } catch (URISyntaxException ex) {
+            throw new HttpForwardException("Exception on getForwardUrl: Failed to build new url", ex);
+        }
     }
 }
