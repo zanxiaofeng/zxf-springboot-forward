@@ -33,6 +33,6 @@ public class TextController {
 
     @GetMapping("/bad")
     public ResponseEntity<String> bad() {
-        return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body("'text failed'");
+        return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body("\"text failed\"");
     }
 }
