@@ -13,7 +13,7 @@ public interface HttpForwardPreProcessor extends UnaryOperator<RequestEntity<byt
     }
 
     static HttpForwardPreProcessor defaultPreProcess() {
-        return clearHeadersPreProcess();
+        return clearHeadersPreProcess(HttpHeaders.COOKIE);
     }
 
     static HttpForwardPreProcessor urlPreProcess(HttpForwardUrlForward httpForwardUrlForward) {
